@@ -16,20 +16,19 @@ class Conta
     {
         if($valorASacar < 0 || $valorASacar > $this->saldo || $this->saldo - $valorASacar < 0) {
             return false;
-        } else {
-            $this->saldo -= $valorASacar;
-            return true;
         }
+        $this->saldo -= $valorASacar;
+        return true;
     }
 
     public function depositar($valorADepositar)
     {
         if($valorADepositar < 0 ) {
             return false;
-        } else {
-            $this->saldo += $valorADepositar;
-            return true;
         }
+
+        $this->saldo += $valorADepositar;
+        return true;
     }
 
     public function transferencia(Conta $conta, $valorATransferir)
