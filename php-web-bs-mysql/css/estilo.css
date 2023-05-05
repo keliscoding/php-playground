@@ -208,8 +208,6 @@ cursor:pointer;
 	margin-bottom:-7px;
 }
 
-
-
 /*Aplicando media query para sites responsivos*/
 @media(min-width:480px){
 	.logo{
