@@ -44,18 +44,37 @@
         <div class="col-md-6">
             <form action="email.php" method="post">
                 <div class="mb-3">
+                    <label for="nome" class="form-label">Nome e Sobrenome</label>
+                    <input type="text"
+                           class="form-control"
+                           name="nome"
+                           id="nome"
+                           placeholder="Seu nome e sobrenome">
+                </div>
+                <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                    <input type="email"
+                           class="form-control"
+                           name="email"
+                           id="email"
+                           placeholder="name@example.com">
                 </div>
                 <div class="mb-3">
                     <label for="assunto" class="form-label">Assunto</label>
-                    <input type="text" class="form-control" id="assunto" placeholder="insira aqui um assunto...">
+                    <input  type="text"
+                            class="form-control"
+                            name="assunto"
+                            id="assunto"
+                            placeholder="insira aqui um assunto...">
                 </div>
                 <div class="mb-3">
                     <label for="mensagem" class="form-label">Mensagem</label>
-                    <textarea class="form-control" id="mensagem" rows="3"></textarea>
+                    <textarea class="form-control"
+                              id="mensagem"
+                              name="mensagem"
+                              rows="3"></textarea>
                 </div>
-                <button type="submit" class="btn btn-warning">Enviar</button>
+                <button type="submit" class="btn btn-warning" id="form-btn">Enviar</button>
             </form>
         </div>
         <div class="col-md-6">
