@@ -2,7 +2,7 @@
 
 // criar schema
 
-function newConnection($banco = 'udemy') {
+function newConnection($banco = 'curso_php') {
     $servidor = '127.0.0.1:3306';
     $usuario = 'root';
     $senha = 'root'; // ideal é não expor essas informações
