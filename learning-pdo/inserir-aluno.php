@@ -6,9 +6,15 @@ require_once 'vendor/autoload.php';
 $caminhoBanco = __DIR__ . '/banco.sqlite';
 $pdo = new PDO('sqlite:' . $caminhoBanco);
 
-$student = new Student(null, 'Kelly Castelo', new DateTimeImmutable('1997-08-08'));
+$student = new Student(null, 'Azai Wolfe', new DateTimeImmutable('1993-09-15'));
 
 $sqlInsert = "INSERT INTO students (name, birth_date) VALUES 
-    ('{$student->name()}', '{$student->birthDate()->format('Y-m-d')}')";
+    (:name, :birthdate)";
 
-var_dump($pdo->exec($sqlInsert));
+$statement = $pdo->prepare($sqlInsert);
+$statement->bindValue(':name', $student->name());
+$statement->bindValue(':birthdate', $student->birthDate()->format('Y-m-d'));
+
+if ($statement->execute()) {
+    echo "Aluno incluído";
+}
