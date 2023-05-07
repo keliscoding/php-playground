@@ -4,6 +4,7 @@ use Alura\Pdo\Domain\Model\Student;
 use Alura\Pdo\Domain\Repository\StudentRepository;
 use DateTimeImmutable;
 use PDO;
+use RuntimeException;
 
 class PdoStudentRepository implements StudentRepository {
 
@@ -22,6 +23,7 @@ class PdoStudentRepository implements StudentRepository {
     public function studentsByBirthDate(\DateTimeInterface $birthDate): array 
     {
         $statement = $this->connection->prepare('SELECT * FROM students WHERE birth_date = :birthdate;');
+
         $statement->bindValue(':birthdate', $birthDate);
         $statement->execute();
 
@@ -31,8 +33,9 @@ class PdoStudentRepository implements StudentRepository {
     public function save(Student $student): bool 
     {
 
-        $statement = $this->connection->prepare("INSERT INTO students (name, birth_date) VALUES 
+        $statement = $this->connection->prepare("INSERT INTO studenta (name, birth_date) VALUES 
         (:name, :birthdate);");
+
         $statement->bindValue(':name', $student->name());
         $statement->bindValue(':birthdate', $student->birthDate()->format('Y-m-d'));
 
@@ -48,7 +51,7 @@ class PdoStudentRepository implements StudentRepository {
     }
 
     private function hydrateStudentList(\PDOStatement $stmt): array {
-        $studentDataList = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $studentDataList = $stmt->fetchAll();
         $studentList = [];
 
         foreach ($studentDataList as $studentData) {
