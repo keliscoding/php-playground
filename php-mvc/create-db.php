@@ -1,5 +1,5 @@
 <?php
+use Zam0k\PhpMvc\config\Connection;
 
-$dbPath = __DIR__ . '/db.sqlite';
-$pdo = new PDO('sqlite:' . $dbPath);
+$pdo = Connection::create();
 $pdo->exec('CREATE TABLE videos (id INTEGER PRIMARY KEY, url TEXT, title TEXT)');

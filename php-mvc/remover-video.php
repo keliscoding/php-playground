@@ -16,4 +16,4 @@ if($stmt->execute() === false) {
     $_SESSION['status'] = 'Video Removed Successfully';
 }
 
-header('Location: /index.php');
+header('Location: /');

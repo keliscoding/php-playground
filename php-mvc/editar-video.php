@@ -11,7 +11,7 @@ $titulo = filter_input(INPUT_POST, 'titulo');
 
 if($url === false || $titulo === false || $id === false) {
     $_SESSION['status'] = 'Something went wrong';
-    header('Location: /index.php');
+    header('Location: /');
     exit();
 }
 
@@ -27,4 +27,4 @@ if($stmt->execute() === false) {
     $_SESSION['status'] = 'Video Removed Successfully';
 }
 
-header('Location: /index.php');
+header('Location: /');

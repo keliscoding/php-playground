@@ -1,0 +1,15 @@
+{
+    "name": "zam0k/php-mvc",
+    "autoload": {
+        "psr-4": {
+            "Zam0k\\PhpMvc\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kelly Castelo",
+            "email": "kawokkun@gmail.com"
+        }
+    ],
+    "require": {}
+}

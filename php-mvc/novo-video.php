@@ -10,7 +10,7 @@ $titulo = filter_input(INPUT_POST, 'titulo');
 
 if($url === false || $titulo === false) {
     $_SESSION['status'] = 'Something went wrong';
-    header('Location: /index.php');
+    header('Location: /');
     exit();
 }
 
@@ -25,5 +25,5 @@ if($stmt->execute() === false) {
     $_SESSION['status'] = 'Video Inserted Successfully';
 }
 
-header('Location: /index.php');
+header('Location: /');
 
