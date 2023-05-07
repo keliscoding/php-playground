@@ -1,7 +1,9 @@
 <?php
+use Alura\Pdo\Infraestructure\Persistence\ConnectionCreator;
 
-$caminhoBanco = __DIR__ . '/banco.sqlite';
-$pdo = new PDO('sqlite:' . $caminhoBanco);
+require_once 'vendor/autoload.php';
+
+$pdo = ConnectionCreator::createConnection();
 
 echo 'conectei';
 

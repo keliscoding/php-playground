@@ -1,12 +1,11 @@
 <?php
 use Alura\Pdo\Domain\Model\Student;
+use Alura\Pdo\Infraestructure\Persistence\ConnectionCreator;
 
 require_once 'vendor/autoload.php';
 
-$caminhoBanco = __DIR__ . '/banco.sqlite';
-$pdo = new PDO('sqlite:' . $caminhoBanco);
-
-$result = $pdo->query('SELECT * FROM students WHERE id = 1');
+$pdo = ConnectionCreator::createConnection();
+$result = $pdo->query('SELECT * FROM students WHERE id = 2');
 
 var_dump($result->fetchColumn(1));
 exit();
