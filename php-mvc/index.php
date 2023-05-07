@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<?php
+    session_start();
+
+    $dbPath = __DIR__ . '/db.sqlite';
+    $pdo = new PDO('sqlite:' . $dbPath);
+    $videoList = $pdo->query('SELECT * FROM videos')->fetchAll(PDO::FETCH_ASSOC);
+?><!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -18,7 +24,7 @@
     <header>
 
         <nav class="cabecalho">
-            <a class="logo" href="./index.html"></a>
+            <a class="logo" href="/"></a>
 
             <div class="cabecalho__icones">
                 <a href="./pages/enviar-video.html" class="cabecalho__videos"></a>
@@ -29,62 +35,31 @@
     </header>
 
     <ul class="videos__container" alt="videos alura">
-        <li class="videos__item">
-            <iframe width="100%" height="72%" src="https://www.youtube.com/embed/pA-EgOaF23I"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-            <div class="descricao-video">
-                <img src="./img/logo.png" alt="logo canal alura">
-                <h3>Qual é o melhor hardware para programação com Mario Souto</h3>
-                <div class="acoes-video">
-                    <a href="./pages/enviar-video.html">Editar</a>
-                    <a href="./pages/enviar-video.html">Excluir</a>
-                </div>
+        <?php if(isset($_SESSION['status'])): ?>
+            <div style="background-color: green">
+                <?php echo $_SESSION['status']; ?>
             </div>
-        </li>
-        <li class="videos__item">
-            <iframe width="100%" height="72%" src="https://www.youtube.com/embed/OrnUhR41MYI"
-                title="Voltando ao mercado após a maternidade: Ana Silvério" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-            <div class="descricao-video">
-                <img src="./img/logo.png" alt="logo canal alura">
-                <h3>Voltando ao mercado após a mmaternidade: Ana Silvério</h3>
-                <div class="acoes-video">
-                    <a href="./pages/enviar-video.html">Editar</a>
-                    <a href="./pages/enviar-video.html">Excluir</a>
-                </div>
-            </div>
-        </li>
-        <li class="videos__item">
-            <iframe width="100%" height="72%" src="https://www.youtube.com/embed/YhnNOTde2I0"
-                title="Mercado de Trabalho | Desmistificando Mobile - Episódio 5" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-            <div class="descricao-video">
-                <img src="./img/logo.png" alt="logo canal alura">
-                <h3>Mercado de Trabalho | Desmistificando Mobile...</h3>
-                <div class="acoes-video">
-                    <a href="./pages/enviar-video.html">Editar</a>
-                    <a href="./pages/enviar-video.html">Excluir</a>
-                </div>
-            </div>
-        </li>
-        <li class="videos__item">
-            <iframe width="100%" height="72%" src="https://www.youtube.com/embed/y8FeZMv37WU"
-                title="Conhecendo a linguagem Go | Hipsters.Talks" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-            <div class="descricao-video">
-                <img src="./img/logo.png" alt="logo canal alura">
-                <h3>Conhecendo a linguagem Go | Hipsters.Talks</h3>
-                <div class="acoes-video">
-                    <a href="./pages/enviar-video.html">Editar</a>
-                    <a href="./pages/enviar-video.html">Excluir</a>
-                </div>
-            </div>
-        </li>
+            <?php
+                unset($_SESSION['status']);   
+        endif ?>
+        <?php foreach ($videoList as $video): ?>
+            <?php if(str_starts_with($video['url'], 'http')): ?>
+                <li class="videos__item">
+                    <iframe width="100%" height="72%" src="<?= $video['url']; ?>"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <div class="descricao-video">
+                        <img src="./img/logo.png" alt="logo canal alura">
+                        <h3><?= $video['title']; ?></h3>
+                        <div class="acoes-video">
+                            <a href="./formulario.php?id=<?= $video['id']; ?>">Editar</a>
+                            <a href="./remover-video.php?id=<?= $video['id']; ?>">Excluir</a>
+                        </div>
+                    </div>
+                </li>
+            <?php endif ?>
+        <?php endforeach ?>
     </ul>
 </body>
 
