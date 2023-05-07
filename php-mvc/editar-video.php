@@ -9,7 +9,7 @@ $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $url = filter_input(INPUT_POST, 'url', FILTER_VALIDATE_URL);
 $titulo = filter_input(INPUT_POST, 'titulo');
 
-if($url === false || $titulo === false || $id === false) {
+if($url === false || $titulo === false || $id === false || $id === null) {
     $_SESSION['status'] = 'Something went wrong';
     header('Location: /');
     exit();
