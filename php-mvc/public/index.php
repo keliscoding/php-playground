@@ -1,31 +1,37 @@
 <?php
 
 use Zam0k\PhpMvc\Config\Connection;
+use Zam0k\PhpMvc\Controller\Video\Error404Controller;
 use Zam0k\PhpMvc\Controller\VideoController;
+use Zam0k\PhpMvc\Repository\UserRepository;
 use Zam0k\PhpMvc\Repository\VideoRepository;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+// refatorar isso aqui
+
 $pdo = Connection::create();
 $videoRepository = new VideoRepository($pdo);
-$controller = new VideoController($videoRepository);
+$userRepository = new UserRepository($pdo);
 
-if($_SERVER['PATH_INFO'] === '/' || !array_key_exists('PATH_INFO', $_SERVER)) {
-    $controller->showListVideoPage();
-} elseif($_SERVER['PATH_INFO'] === '/novo-video') {
-    if($_SERVER['REQUEST_METHOD'] === 'GET') {
-        $controller->showFormularioPage();
-    } elseif($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $controller->createVideo();
+$routes = require_once __DIR__ . '/../config/routes.php';
+
+$pathInfo = $_SERVER['PATH_INFO'] ?? '/';
+$httpMethod = $_SERVER['REQUEST_METHOD'];
+
+$key = "$httpMethod|$pathInfo";
+
+if(array_key_exists($key, $routes)) {
+    $controllerClass = $routes[$key];
+
+    if($controllerClass == \Zam0k\PhpMvc\Controller\Auth\LoginController::class) {
+        $controller = new $controllerClass($userRepository);
+    } else {
+        $controller = new $controllerClass($videoRepository);
     }
-} elseif($_SERVER['PATH_INFO'] === '/editar-video') {
-    if($_SERVER['REQUEST_METHOD'] === 'GET') {
-        $controller->showFormularioPage();
-    } elseif($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $controller->editVideo();
-    }
-} elseif($_SERVER['PATH_INFO'] === '/remover-video') {
-    $controller->removeVideo();
+
 } else {
-    http_response_code(404); //dava pra redirecionar pra uma 404 aqui
+    $controller = new Error404Controller();
 }
+
+$controller->processaRequisicao();
