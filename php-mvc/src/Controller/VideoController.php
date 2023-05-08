@@ -18,77 +18,20 @@ class VideoController
 
     public function showListVideoPage(): void {
         $videoList = $this->videoRepository->all();
-        require_once __DIR__ . '/../../inicio-html.php';
-        ?>
-            <ul class="videos__container" alt="videos alura">
-                <?php if(isset($_SESSION['status'])): ?>
-                    <div style="background-color: green">
-                        <?php echo $_SESSION['status']; ?>
-                    </div>
-                    <?php
-                        unset($_SESSION['status']);
-                endif ?>
-                <?php foreach ($videoList as $video): ?>
-                    <?php if(str_starts_with($video->getUrl(), 'http')): ?>
-                        <li class="videos__item">
-                            <iframe width="100%" height="72%" src="<?= $video->getUrl(); ?>"
-                                title="YouTube video player" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
-                            <div class="descricao-video">
-                                <img src="./img/logo.png" alt="logo canal alura">
-                                <h3><?= $video->getTitle(); ?></h3>
-                                <div class="acoes-video">
-                                    <a href="./editar-video?id=<?= $video->getId(); ?>">Editar</a>
-                                    <a href="./remover-video?id=<?= $video->getId(); ?>">Excluir</a>
-                                </div>
-                            </div>
-                        </li>
-                    <?php endif ?>
-                <?php endforeach ?>
-            </ul>
-        <?php require_once __DIR__ . '/../../fim-html.php';
+        require_once __DIR__ . '/../../views/video-list.php';
     }
 
     public function showFormularioPage(): void
     {
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
-        $video = new Video('https://www.google.com.br', '');
+        $video = null;
 
         if($id !== false && $id !== null) {
             $video = $this->videoRepository->getById($id);
         }
 
-        require_once __DIR__ . '/../../inicio-html.php'; ?>
-            <main class="container">
-
-                <form class="container__formulario"
-                method="post">
-                    <h2 class="formulario__titulo">Envie um vídeo!</h2>
-                        <div class="formulario__campo">
-                            <label class="campo__etiqueta" for="url">Link embed</label>
-                            <input name="url"
-                                value="<?= $video->getUrl() ?>"
-                                class="campo__escrita" required
-                                placeholder="Por exemplo: https://www.youtube.com/embed/FAY1K2aUg5g" id='url' />
-                        </div>
-
-
-                        <div class="formulario__campo">
-                            <label class="campo__etiqueta" for="titulo">Titulo do vídeo</label>
-                            <input name="titulo"
-                            value="<?= $video->getTitle() ?>"
-                            class="campo__escrita" required
-                            placeholder="Neste campo, dê o nome do vídeo"
-                            id='titulo' />
-                        </div>
-
-                        <input class="formulario__botao" type="submit" value="Enviar" />
-                </form>
-
-            </main>
-        <?php require_once __DIR__ . '/../../fim-html.php';
+        require_once __DIR__ . '/../../views/form.php';
     }
 
     public function editVideo(): void
