@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/composer/src" isTestSource="false" packagePrefix="Zam0k\BuscadorCursos\" />
+      <sourceFolder url="file://$MODULE_DIR$/learning-pdo/src" isTestSource="false" packagePrefix="Alura\Pdo\" />
+      <sourceFolder url="file://$MODULE_DIR$/php-mvc/src" isTestSource="false" packagePrefix="Zam0k\PhpMvc\" />
+      <excludeFolder url="file://$MODULE_DIR$/composer/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/composer/vendor/guzzlehttp/guzzle" />
+      <excludeFolder url="file://$MODULE_DIR$/composer/vendor/guzzlehttp/promises" />
+      <excludeFolder url="file://$MODULE_DIR$/composer/vendor/guzzlehttp/psr7" />
+      <excludeFolder url="file://$MODULE_DIR$/composer/vendor/psr/http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/composer/vendor/psr/http-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/composer/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/composer/vendor/ralouphie/getallheaders" />
+      <excludeFolder url="file://$MODULE_DIR$/composer/vendor/symfony/css-selector" />
+      <excludeFolder url="file://$MODULE_DIR$/composer/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/composer/vendor/symfony/dom-crawler" />
+      <excludeFolder url="file://$MODULE_DIR$/composer/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/composer/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/learning-pdo/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/php-mvc/vendor/composer" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
