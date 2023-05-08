@@ -7,6 +7,9 @@ class LoginFormController implements Controller
 {
     public function processaRequisicao()
     {
+        if(isset($_SESSION['logado'])) {
+            header('Location: /');
+        }
         require_once __DIR__ . '/../../../views/login-form.php';
     }
 }

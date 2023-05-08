@@ -11,7 +11,6 @@ class DeleteVideoController implements Controller
 
     public function __construct(VideoRepository $videoRepository)
     {
-        session_start();
         $this->videoRepository = $videoRepository;
     }
     public function processaRequisicao()

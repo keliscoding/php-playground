@@ -11,7 +11,6 @@ class LoginController implements Controller
 
     public function __construct(UserRepository $userRepository)
     {
-        session_start();
         $this->userRepository = $userRepository;
     }
 
@@ -36,6 +35,7 @@ class LoginController implements Controller
             header('Location: /login');
         } else {
             $_SESSION['status'] = 'Logged in Successfully';
+            $_SESSION['logado'] = true;
             header('Location: /');
         }
     }
