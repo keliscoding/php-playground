@@ -7,6 +7,8 @@ return [
     'GET|/editar-video' => \Zam0k\PhpMvc\Controller\Video\VideoFormController::class,
     'POST|/editar-video' => \Zam0k\PhpMvc\Controller\Video\EditVideoController::class,
     'GET|/remover-video' => \Zam0k\PhpMvc\Controller\Video\DeleteVideoController::class,
+    'GET|/remover-thumbnail' => \Zam0k\PhpMvc\Controller\Video\RemoveVideoThumbnail::class,
     'GET|/login' => \Zam0k\PhpMvc\Controller\Auth\LoginFormController::class,
     'POST|/login' => \Zam0k\PhpMvc\Controller\Auth\LoginController::class,
+    'GET|/logout' => \Zam0k\PhpMvc\Controller\Auth\LogoutController::class
 ];

@@ -7,6 +7,8 @@ class Video
     private $url;
     private $title;
 
+    private $image = null;
+
     public function __construct(
         string $url,
         string $title
@@ -48,6 +50,22 @@ class Video
     public function setTitle(string $title): void
     {
         $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage(): string|null
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage(string|null $image): void
+    {
+        $this->image = $image;
     }
 
 }

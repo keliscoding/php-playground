@@ -21,11 +21,12 @@
 
         <nav class="cabecalho">
             <a class="logo" href="/"></a>
-
-            <div class="cabecalho__icones">
-                <a href="/novo-video" class="cabecalho__videos"></a>
-                <a href="/login" class="cabecalho__sair">Sair</a>
-            </div>
+            <?php if($_SERVER['REQUEST_URI'] !== '/login'): ?>
+                <div class="cabecalho__icones">
+                    <a href="/novo-video" class="cabecalho__videos"></a>
+                    <a href="/logout" class="cabecalho__sair">Sair</a>
+                </div>
+            <?php endif; ?>
         </nav>
 
     </header>
