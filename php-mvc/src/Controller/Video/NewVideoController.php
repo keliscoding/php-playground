@@ -5,6 +5,8 @@ namespace Zam0k\PhpMvc\Controller\Video;
 use Zam0k\PhpMvc\Controller\Controller;
 use Zam0k\PhpMvc\Entity\Video;
 use Zam0k\PhpMvc\Repository\VideoRepository;
+use finfo;
+use Zam0k\PhpMvc\Util\FileSettings;
 
 class NewVideoController implements Controller
 {
@@ -27,14 +29,7 @@ class NewVideoController implements Controller
 
         $video = new Video($url, $titulo);
 
-        if($_FILES['image']['error'] === UPLOAD_ERR_OK) {
-            move_uploaded_file(
-                $_FILES['image']['tmp_name'],
-                __DIR__ . '/../../../public/img/uploads/' . $_FILES['image']['name']
-
-            );
-            $video->setImage($_FILES['image']['name']);
-        }
+        FileSettings::uploadImage($video);
 
         $result = $this->videoRepository->add($video);
 

@@ -34,4 +34,12 @@ class UserRepository
         $user->setPassword($userData['password']);
         return $user;
     }
+
+    public function updatePassword($id, $password): bool
+    {
+        $stmt = $this->pdo->prepare('UPDATE users SET password = ? where id = ?');
+        $stmt->bindValue(1, password_hash($password, PASSWORD_ARGON2ID));
+        $stmt->bindValue(2, $id);
+        return $stmt->execute();
+    }
 }

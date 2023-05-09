@@ -20,6 +20,7 @@ $pathInfo = $_SERVER['PATH_INFO'] ?? '/';
 $httpMethod = $_SERVER['REQUEST_METHOD'];
 
 session_start();
+session_regenerate_id();
 $isLoginRoute = $pathInfo === '/login';
 if(!isset($_SESSION['logado']) && !$isLoginRoute) {
     header('Location: /login');
